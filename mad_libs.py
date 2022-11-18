@@ -11,13 +11,22 @@ def get_mad_libs_from_user():
     plural_noun = input("Enter a plural noun:")
     celebrity = input("Enter a celebrity:")
     return color, plural_noun, celebrity
-def get_mad_libs_from_command_line():
+
+def parse_args():
     parser = argparse.ArgumentParser(description='color, noun, celebrity')
-    parser.add_argument('passed_info', type=str, nargs='+')
+    # parser.add_argument('passed_info', type=str, nargs='+')
+    parser.add_argument('--color', type=str, required=True)
+    parser.add_argument('--plural_noun', type=str, required=True)
+    parser.add_argument('--celebrity', type=str, required=True)
+
     args = parser.parse_args()
-    return args.passed_info
+    return args
+def get_mad_libs_from_args(args):
+    return  args.color, args.plural_noun, args.celebrity
+
 
 if __name__ == '__main__':
     # color, plural_noun, celebrity = get_mad_libs_from_user()
-    color, plural_noun, celebrity = get_mad_libs_from_command_line()
+    args = parse_args()
+    color, plural_noun, celebrity = get_mad_libs_from_args(args)
     print_mad_libs(color, plural_noun, celebrity)
