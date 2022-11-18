@@ -15,9 +15,9 @@ def get_mad_libs_from_user():
 def parse_args():
     parser = argparse.ArgumentParser(description='color, noun, celebrity')
     # parser.add_argument('passed_info', type=str, nargs='+')
-    parser.add_argument('--color', type=str, required=True)
-    parser.add_argument('--plural_noun', type=str, required=True)
-    parser.add_argument('--celebrity', type=str, required=True)
+    parser.add_argument('--color', type=str, required=False)
+    parser.add_argument('--plural_noun', type=str, required=False)
+    parser.add_argument('--celebrity', type=str, required=False)
 
     args = parser.parse_args()
     return args
@@ -29,4 +29,9 @@ if __name__ == '__main__':
     # color, plural_noun, celebrity = get_mad_libs_from_user()
     args = parse_args()
     color, plural_noun, celebrity = get_mad_libs_from_args(args)
+    if color is None:
+        color, plural_noun, celebrity = get_mad_libs_from_user()
+
+
+
     print_mad_libs(color, plural_noun, celebrity)
